@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Myanmar Quakes + Tectonic Lineaments</title>
+    <link rel="stylesheet" href="/offline-dashboard/styles.css" />
+  </head>
+  <body>
+    <div id="loading" class="appShell">
+      <div class="loadingCard" id="loadingMsg">Loading dashboard data...</div>
+    </div>
+
+    <div id="app" class="app" style="display: none">
+      <header class="topBar">
+        <div class="topTitle">Myanmar Quakes + Tectonic Lineaments</div>
+        <div class="topKpis">
+          <div class="chip">
+            <div class="chipLabel">Filtered</div>
+            <div class="chipValue" id="kpiFiltered">N/A</div>
+          </div>
+          <div class="chip">
+            <div class="chipLabel">Max mag</div>
+            <div class="chipValue" id="kpiMaxMag">N/A</div>
+          </div>
+          <div class="chip">
+            <div class="chipLabel">Time span</div>
+            <div class="chipValue" id="kpiTimeSpan">N/A</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <section class="panel" id="filtersPanel">
+            <div class="panelHeader">
+              <div class="panelTitle">Filters</div>
+              <div class="panelMeta" id="filterCount">N/A</div>
+            </div>
+
+            <div class="field">
+              <div class="labelRow">
+                <label class="label" for="startDate">Time (UTC)</label>
+                <span class="hint" id="timeHint">N/A</span>
+              </div>
+              <div class="row2">
+                <input id="startDate" type="date" />
+                <input id="endDate" type="date" />
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="labelRow">
+                <div class="label">Magnitude</div>
+                <span class="hint" id="magHint">N/A</span>
+              </div>
+              <div class="row2">
+                <input id="magMin" type="number" step="0.1" />
+                <input id="magMax" type="number" step="0.1" />
+              </div>
+              <div class="row2">
+                <input id="magMinRange" type="range" step="0.1" />
+                <input id="magMaxRange" type="range" step="0.1" />
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="labelRow">
+                <div class="label">Depth (km)</div>
+                <span class="hint" id="depthHint">N/A</span>
+              </div>
+              <div class="row2">
+                <input id="depthMin" type="number" step="1" />
+                <input id="depthMax" type="number" step="1" />
+              </div>
+              <div class="row2">
+                <input id="depthMinRange" type="range" step="1" />
+                <input id="depthMaxRange" type="range" step="1" />
+              </div>
+            </div>
+
+            <div class="actionsRow">
+              <button class="button" id="resetBtn" type="button">Reset</button>
+              <button class="button buttonAlt" id="fitBtn" type="button">Fit map to filtered</button>
+            </div>
+          </section>
+
+          <section class="panel" id="detailsPanel">
+            <div class="panelHeader">
+              <div class="panelTitle">Selected event</div>
+              <button class="linkButton" id="clearSelectionBtn" type="button" style="display: none">
+                Clear
+              </button>
+              <div class="panelMeta" id="selectionMeta">None</div>
+            </div>
+            <div class="emptyState" id="selectionBody">
+              Click a quake marker or a chart point to see details.
+            </div>
+          </section>
+
+          <section class="panel" id="eventsPanel">
+            <div class="panelHeader">
+              <div class="panelTitle">Events</div>
+              <div class="panelMeta" id="eventsCount">N/A</div>
+            </div>
+            <div class="tableWrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Time (UTC)</th>
+                    <th>Mag</th>
+                    <th>Depth</th>
+                  </tr>
+                </thead>
+                <tbody id="eventsTbody"></tbody>
+              </table>
+            </div>
+          </section>
+        </aside>
+
+        <main class="main">
+          <section class="panel panelFlush">
+            <div class="panelHeader">
+              <div class="panelTitle">Map</div>
+              <div class="panelMeta" id="mapMeta">N/A</div>
+            </div>
+            <div class="mapWrap">
+              <svg id="mapSvg" class="mapSvg" preserveAspectRatio="xMidYMid meet"></svg>
+            </div>
+          </section>
+
+          <div class="charts">
+            <section class="panel">
+              <div class="panelHeader">
+                <div class="panelTitle">Daily quake count</div>
+                <div class="panelMeta">Drag to brush time</div>
+              </div>
+              <div class="chartWrap">
+                <svg id="timeChart" class="chartSvg"></svg>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panelHeader">
+                <div class="panelTitle">Magnitude histogram</div>
+                <div class="panelMeta">Click a bin</div>
+              </div>
+              <div class="chartWrap">
+                <svg id="magChart" class="chartSvg"></svg>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panelHeader">
+                <div class="panelTitle">Depth histogram</div>
+                <div class="panelMeta">Click a bin</div>
+              </div>
+              <div class="chartWrap">
+                <svg id="depthChart" class="chartSvg"></svg>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panelHeader">
+                <div class="panelTitle">Depth vs magnitude</div>
+                <div class="panelMeta">Click a point</div>
+              </div>
+              <div class="chartWrap">
+                <svg id="scatterChart" class="chartSvg"></svg>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script type="module" src="/offline-dashboard/app.js"></script>
+  </body>
+</html>
