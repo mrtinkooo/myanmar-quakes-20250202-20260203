@@ -36,15 +36,17 @@ const initialState: DashboardState = {
   map: { fitFilteredNonce: 0 },
 };
 
+type DataLoadedPayload = {
+  quakes: QuakeFeature[];
+  lineaments: LineamentsFC;
+  admin0: Admin0FC;
+  extents: Extents;
+};
+
 type Action =
   | {
       type: 'dataLoaded';
-      payload: {
-        quakes: QuakeFeature[];
-        lineaments: LineamentsFC;
-        admin0: Admin0FC;
-        extents: Extents;
-      };
+      payload: DataLoadedPayload;
     }
   | { type: 'dataError'; error: string }
   | { type: 'setTimeRange'; startMs: number; endMs: number }
@@ -105,6 +107,13 @@ function reducer(state: DashboardState, action: Action): DashboardState {
   }
 }
 
+type DataLoadedPayload = {
+  quakes: QuakeFeature[];
+  lineaments: LineamentsFC;
+  admin0: Admin0FC;
+  extents: Extents;
+};
+
 type DashboardContextValue = {
   state: DashboardState;
   actions: {
@@ -114,7 +123,7 @@ type DashboardContextValue = {
     resetFilters: () => void;
     selectQuake: (id: string | null) => void;
     fitFiltered: () => void;
-    dataLoaded: (payload: Action['payload']) => void;
+    dataLoaded: (payload: DataLoadedPayload) => void;
     dataError: (error: string) => void;
   };
 };

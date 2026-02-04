@@ -5,6 +5,32 @@ Interactive map + linked charts using:
 - `quakes.json` (USGS GeoJSON quakes)
 - `admin0.json` (Myanmar boundary)
 
+## 🌐 Live Demo
+Visit the live dashboard at: `https://mrtinkooo.github.io/myanmar-quakes-20250202-20260203/`
+
+## 📦 Publishing to GitHub Pages
+
+This dashboard is automatically deployed to GitHub Pages when changes are pushed to the `main` branch.
+
+### Initial Setup (One-time configuration)
+1. Go to your GitHub repository settings
+2. Navigate to **Pages** section (under "Code and automation")
+3. Under **Source**, select **GitHub Actions**
+4. Push changes to the `main` branch to trigger automatic deployment
+
+### Automatic Deployment
+- Every push to the `main` branch triggers the deployment workflow
+- The workflow builds the app and deploys it to GitHub Pages
+- You can also manually trigger deployment from the Actions tab
+
+### Manual Build and Preview
+To build the site locally:
+```bash
+npm install
+npm run build
+npm run preview
+```
+
 ## Run (no dependencies)
 This repo includes a dependency-free dashboard (no npm installs needed).
 
