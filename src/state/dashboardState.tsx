@@ -107,13 +107,6 @@ function reducer(state: DashboardState, action: Action): DashboardState {
   }
 }
 
-type DataLoadedPayload = {
-  quakes: QuakeFeature[];
-  lineaments: LineamentsFC;
-  admin0: Admin0FC;
-  extents: Extents;
-};
-
 type DashboardContextValue = {
   state: DashboardState;
   actions: {
