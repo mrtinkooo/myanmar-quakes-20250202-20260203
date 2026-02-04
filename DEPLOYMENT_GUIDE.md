@@ -7,6 +7,19 @@ This guide provides step-by-step instructions to publish your Myanmar Quakes Das
 - A GitHub repository containing your dashboard code
 - Admin access to the repository settings
 
+## 🚀 Quick Fix for 404 Error
+
+If you're seeing a **404 error** on `https://mrtinkooo.github.io/myanmar-quakes-20250202-20260203/`:
+
+**The issue**: The initial deployment failed because GitHub Pages wasn't properly configured when the workflow first ran.
+
+**The solution**: 
+1. **Verify GitHub Pages is enabled**: Go to [Repository Settings → Pages](https://github.com/mrtinkooo/myanmar-quakes-20250202-20260203/settings/pages) and ensure:
+   - **Source** is set to **"GitHub Actions"** (not "Deploy from a branch")
+2. **Merge this PR to main**: This will trigger a new deployment with the fix
+3. **Wait 2-3 minutes** for the workflow to complete
+4. **Access your dashboard**: `https://mrtinkooo.github.io/myanmar-quakes-20250202-20260203/`
+
 ## 🚀 One-Time Setup
 
 Follow these steps once to enable GitHub Pages deployment:
@@ -17,7 +30,7 @@ Follow these steps once to enable GitHub Pages deployment:
 2. Click on **Settings** (in the top menu)
 3. In the left sidebar, navigate to **Pages** (under "Code and automation")
 4. Under **Build and deployment**:
-   - **Source**: Select **GitHub Actions** from the dropdown
+   - **Source**: Select **GitHub Actions** from the dropdown (NOT "Deploy from a branch")
    - This enables the automated deployment workflow
 
 ### Step 2: Merge to Main Branch
@@ -57,14 +70,30 @@ The following files were added/modified to enable GitHub Pages deployment:
 2. **`vite.config.ts`** - Added `base` path configuration for GitHub Pages
 3. **`README.md`** - Added deployment instructions
 4. **`src/state/dashboardState.tsx`** - Fixed TypeScript JSX issue (renamed from .ts to .tsx)
+5. **`public/.nojekyll`** - Prevents Jekyll processing (important for single-page apps)
 
 ## 🐛 Troubleshooting
+
+### Getting 404 error on GitHub Pages
+
+**Symptom**: Site shows "404 - There isn't a GitHub Pages site here"
+
+**Cause**: GitHub Pages wasn't properly enabled when the first deployment ran
+
+**Solution**:
+1. Verify GitHub Pages is enabled with **"GitHub Actions"** as source in repository settings
+2. Trigger a new deployment by:
+   - Merging a new change to `main` branch, OR
+   - Manually running the workflow from Actions tab
+3. Wait 2-3 minutes for deployment to complete
+4. Clear browser cache and reload
 
 ### Deployment fails in Actions tab
 
 1. Check the workflow logs in the Actions tab
 2. Ensure all dependencies are listed in `package.json`
 3. Verify the build command succeeds locally: `npm run build`
+4. Check that GitHub Pages is enabled with "GitHub Actions" as source
 
 ### Dashboard doesn't load after deployment
 
