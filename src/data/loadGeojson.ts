@@ -41,10 +41,11 @@ export async function loadDashboardData(): Promise<{
   lineaments: LineamentsFC;
   admin0: Admin0FC;
 }> {
+  const baseUrl = import.meta.env.BASE_URL;
   const [quakesFc, lineaments, admin0] = await Promise.all([
-    loadJson<unknown>('/data/quakes.json'),
-    loadJson<LineamentsFC>('/data/Myanmar_Tectonic_Map_2011.geojson'),
-    loadJson<Admin0FC>('/data/admin0.json'),
+    loadJson<unknown>(`${baseUrl}data/quakes.json`),
+    loadJson<LineamentsFC>(`${baseUrl}data/Myanmar_Tectonic_Map_2011.geojson`),
+    loadJson<Admin0FC>(`${baseUrl}data/admin0.json`),
   ]);
 
   if (!quakesFc || typeof quakesFc !== 'object') throw new Error('Invalid quakes GeoJSON');
