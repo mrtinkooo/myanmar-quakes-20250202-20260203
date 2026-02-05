@@ -1,6 +1,44 @@
 import { describe, it, expect } from 'vitest';
 import { boundsFromBbox, bboxFromQuakes, depthColor } from '../utils/geo';
-import type { QuakeFeature } from '../data/types';
+import type { QuakeFeature, QuakeProperties } from '../data/types';
+
+function createMockQuake(id: string, lon: number, lat: number, depthKm: number, mag: number): QuakeFeature {
+  const properties: QuakeProperties = {
+    mag,
+    place: 'Myanmar',
+    time: Date.now(),
+    updated: Date.now(),
+    tz: null,
+    url: '',
+    detail: '',
+    felt: null,
+    cdi: null,
+    mmi: null,
+    alert: null,
+    status: 'reviewed',
+    tsunami: 0,
+    sig: 0,
+    net: 'test',
+    code: 'test',
+    ids: '',
+    sources: '',
+    types: '',
+    nst: null,
+    dmin: null,
+    rms: null,
+    gap: null,
+    magType: 'ml',
+    type: 'earthquake',
+    title: 'Test',
+  };
+
+  return {
+    id,
+    type: 'Feature',
+    geometry: { type: 'Point', coordinates: [lon, lat, depthKm] },
+    properties,
+  };
+}
 
 describe('geo utilities', () => {
   describe('boundsFromBbox', () => {
@@ -25,20 +63,7 @@ describe('geo utilities', () => {
 
   describe('bboxFromQuakes', () => {
     it('should calculate bounding box from quakes', () => {
-      const quakes: QuakeFeature[] = [
-        {
-          id: '1',
-          type: 'Feature',
-          geometry: { type: 'Point', coordinates: [95, 20, 10] },
-          properties: { mag: 4.0, place: 'Myanmar', time: 1000, url: '', title: 'Test' },
-        },
-        {
-          id: '2',
-          type: 'Feature',
-          geometry: { type: 'Point', coordinates: [98, 23, 10] },
-          properties: { mag: 5.0, place: 'Myanmar', time: 2000, url: '', title: 'Test' },
-        },
-      ];
+      const quakes: QuakeFeature[] = [createMockQuake('1', 95, 20, 10, 4.0), createMockQuake('2', 98, 23, 10, 5.0)];
 
       const result = bboxFromQuakes(quakes);
       expect(result).toEqual([95, 20, 98, 23]);
@@ -52,17 +77,10 @@ describe('geo utilities', () => {
     it('should skip invalid coordinates', () => {
       const quakes: QuakeFeature[] = [
         {
-          id: '1',
-          type: 'Feature',
+          ...createMockQuake('1', NaN, 20, 10, 4.0),
           geometry: { type: 'Point', coordinates: [NaN, 20, 10] },
-          properties: { mag: 4.0, place: 'Myanmar', time: 1000, url: '', title: 'Test' },
         },
-        {
-          id: '2',
-          type: 'Feature',
-          geometry: { type: 'Point', coordinates: [98, 23, 10] },
-          properties: { mag: 5.0, place: 'Myanmar', time: 2000, url: '', title: 'Test' },
-        },
+        createMockQuake('2', 98, 23, 10, 5.0),
       ];
 
       const result = bboxFromQuakes(quakes);
