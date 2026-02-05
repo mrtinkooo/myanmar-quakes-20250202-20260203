@@ -14,7 +14,10 @@ function ceilToStep(x: number, step: number): number {
 }
 
 function formatFixed(x: number, digits: number): string {
-  return x.toFixed(digits).replace(/\.0+$/, '').replace(/(\.\d*[1-9])0+$/, '$1');
+  return x
+    .toFixed(digits)
+    .replace(/\.0+$/, '')
+    .replace(/(\.\d*[1-9])0+$/, '$1');
 }
 
 export function histogramEvenBins(
@@ -39,7 +42,10 @@ export function histogramEvenBins(
     let idx = Math.floor((v - start) / step);
     if (idx < 0) idx = 0;
     if (idx >= binCount) idx = binCount - 1;
-    counts[idx] += 1;
+    const currentCount = counts[idx];
+    if (currentCount !== undefined) {
+      counts[idx] = currentCount + 1;
+    }
   }
 
   const digits = opts?.labelDigits ?? 1;

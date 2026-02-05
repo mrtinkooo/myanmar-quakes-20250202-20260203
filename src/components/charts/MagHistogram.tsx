@@ -61,12 +61,7 @@ export default function MagHistogram(props: {
             >
               {data.map((b) => {
                 const inSel = b.start >= props.selectedMag.min && b.end <= props.selectedMag.max;
-                return (
-                  <Cell
-                    key={b.label}
-                    fill={inSel ? 'rgba(255, 183, 3, 0.95)' : 'rgba(255,255,255,0.18)'}
-                  />
-                );
+                return <Cell key={b.label} fill={inSel ? 'rgba(255, 183, 3, 0.95)' : 'rgba(255,255,255,0.18)'} />;
               })}
             </Bar>
           </BarChart>
@@ -75,4 +70,3 @@ export default function MagHistogram(props: {
     </section>
   );
 }
-

@@ -1,14 +1,5 @@
 import { useMemo } from 'react';
-import {
-  Bar,
-  BarChart,
-  Brush,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
+import { Bar, BarChart, Brush, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import type { Filters, QuakeFeature } from '../../data/types';
 import { DAY_MS, formatUtcDate, utcDayStartMs } from '../../utils/time';
 
@@ -37,10 +28,7 @@ export default function TimeSeriesChart(props: {
   selectedTime: Filters['time'];
   onSetTimeRange: (startMs: number, endMs: number) => void;
 }) {
-  const data = useMemo(
-    () => buildDailyCounts(props.quakes, props.extentsTime),
-    [props.quakes, props.extentsTime],
-  );
+  const data = useMemo(() => buildDailyCounts(props.quakes, props.extentsTime), [props.quakes, props.extentsTime]);
 
   const startDay = utcDayStartMs(props.extentsTime.startMs);
   const selStart = utcDayStartMs(props.selectedTime.startMs);
@@ -118,4 +106,3 @@ export default function TimeSeriesChart(props: {
     </section>
   );
 }
-

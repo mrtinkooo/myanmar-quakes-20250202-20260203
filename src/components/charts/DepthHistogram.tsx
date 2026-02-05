@@ -61,12 +61,7 @@ export default function DepthHistogram(props: {
             >
               {data.map((b) => {
                 const inSel = b.start >= props.selectedDepth.min && b.end <= props.selectedDepth.max;
-                return (
-                  <Cell
-                    key={b.label}
-                    fill={inSel ? 'rgba(33, 158, 188, 0.95)' : 'rgba(255,255,255,0.18)'}
-                  />
-                );
+                return <Cell key={b.label} fill={inSel ? 'rgba(33, 158, 188, 0.95)' : 'rgba(255,255,255,0.18)'} />;
               })}
             </Bar>
           </BarChart>
@@ -75,4 +70,3 @@ export default function DepthHistogram(props: {
     </section>
   );
 }
-

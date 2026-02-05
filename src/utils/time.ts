@@ -28,4 +28,3 @@ export function formatUtcDateTime(epochMs: number): string {
   const iso = new Date(epochMs).toISOString();
   return iso.replace('T', ' ').replace(/\.\d{3}Z$/, 'Z');
 }
-

@@ -98,8 +98,8 @@ function DashboardApp() {
           <div className="errorTitle">Failed to load data</div>
           <div className="errorMsg">{state.data.error}</div>
           <div className="errorHint">
-            Expected files in <span className="mono">public/data/</span>: quakes.json, Myanmar_Tectonic_Map_2011.geojson,
-            admin0.json
+            Expected files in <span className="mono">public/data/</span>: quakes.json,
+            Myanmar_Tectonic_Map_2011.geojson, admin0.json
           </div>
         </div>
       </div>

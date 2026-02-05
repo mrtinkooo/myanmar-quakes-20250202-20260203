@@ -1,13 +1,5 @@
 import { useMemo } from 'react';
-import {
-  CartesianGrid,
-  ResponsiveContainer,
-  Scatter,
-  ScatterChart,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
+import { CartesianGrid, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts';
 import type { QuakeFeature } from '../../data/types';
 import { depthColor } from '../../utils/geo';
 
@@ -107,7 +99,7 @@ export default function DepthVsMagScatter(props: {
             />
             <Scatter
               data={data}
-              shape={(p) => <Dot {...p} selectedId={props.selectedId} />}
+              shape={(p: unknown) => <Dot {...(p as object)} selectedId={props.selectedId} />}
               onClick={(d) => {
                 const row = (d as { payload?: PointRow }).payload;
                 if (row?.id) props.onSelectQuake(row.id);
@@ -119,4 +111,3 @@ export default function DepthVsMagScatter(props: {
     </section>
   );
 }
-

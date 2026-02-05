@@ -44,45 +44,34 @@ export default function MapView(props: {
       <div className="panelHeader">
         <div className="panelTitle">Map</div>
         <div className="panelMeta">
-          {props.quakes.length.toLocaleString()} filtered quakes | lineaments {props.lineaments.features.length.toLocaleString()}
+          {props.quakes.length.toLocaleString()} filtered quakes | lineaments{' '}
+          {props.lineaments.features.length.toLocaleString()}
         </div>
       </div>
 
       <div className="mapWrap">
-        <MapContainer
-          center={[21.2, 96.0]}
-          zoom={5}
-          minZoom={4}
-          scrollWheelZoom
-          preferCanvas
-          whenReady={(e) => {
-            mapRef.current = e.target;
-          }}
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
+        <MapContainer center={[21.2, 96.0]} zoom={5} minZoom={4} scrollWheelZoom preferCanvas ref={mapRef}>
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
           <Pane name="admin0" style={{ zIndex: 350 }}>
             <GeoJSON
               data={props.admin0 as unknown as GeoJSON.GeoJsonObject}
-              style={() => ({
+              pathOptions={{
                 color: 'rgba(255,255,255,0.65)',
                 weight: 2,
                 fillOpacity: 0,
-              })}
+              }}
             />
           </Pane>
 
           <Pane name="lineaments" style={{ zIndex: 360 }}>
             <GeoJSON
               data={props.lineaments as unknown as GeoJSON.GeoJsonObject}
-              style={() => ({
+              pathOptions={{
                 color: '#ffb703',
                 weight: 1,
                 opacity: 0.65,
-              })}
+              }}
             />
           </Pane>
 
