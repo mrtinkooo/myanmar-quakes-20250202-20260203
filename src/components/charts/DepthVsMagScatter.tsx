@@ -1,13 +1,5 @@
 import { useMemo } from 'react';
-import {
-  CartesianGrid,
-  ResponsiveContainer,
-  Scatter,
-  ScatterChart,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
+import { CartesianGrid, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts';
 import type { QuakeFeature } from '../../data/types';
 import { depthColor } from '../../utils/geo';
 
@@ -119,4 +111,3 @@ export default function DepthVsMagScatter(props: {
     </section>
   );
 }
-

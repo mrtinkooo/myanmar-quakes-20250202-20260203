@@ -56,4 +56,3 @@ export default function DetailsPanel(props: { quake: QuakeFeature | null; onClea
     </section>
   );
 }
-

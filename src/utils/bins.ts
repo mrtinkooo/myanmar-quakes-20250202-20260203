@@ -14,7 +14,10 @@ function ceilToStep(x: number, step: number): number {
 }
 
 function formatFixed(x: number, digits: number): string {
-  return x.toFixed(digits).replace(/\.0+$/, '').replace(/(\.\d*[1-9])0+$/, '$1');
+  return x
+    .toFixed(digits)
+    .replace(/\.0+$/, '')
+    .replace(/(\.\d*[1-9])0+$/, '$1');
 }
 
 export function histogramEvenBins(

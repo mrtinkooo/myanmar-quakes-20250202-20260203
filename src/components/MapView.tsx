@@ -44,22 +44,14 @@ export default function MapView(props: {
       <div className="panelHeader">
         <div className="panelTitle">Map</div>
         <div className="panelMeta">
-          {props.quakes.length.toLocaleString()} filtered quakes | lineaments {props.lineaments.features.length.toLocaleString()}
+          {props.quakes.length.toLocaleString()} filtered quakes | lineaments{' '}
+          {props.lineaments.features.length.toLocaleString()}
         </div>
       </div>
 
       <div className="mapWrap">
-        <MapContainer
-          center={[21.2, 96.0]}
-          zoom={5}
-          minZoom={4}
-          scrollWheelZoom
-          preferCanvas
-          ref={mapRef}
-        >
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
+        <MapContainer center={[21.2, 96.0]} zoom={5} minZoom={4} scrollWheelZoom preferCanvas ref={mapRef}>
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
           <Pane name="admin0" style={{ zIndex: 350 }}>
             <GeoJSON

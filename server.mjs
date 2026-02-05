@@ -60,7 +60,6 @@ const server = http.createServer(async (req, res) => {
 
 const PORT = Number(process.env.PORT || 5173);
 server.listen(PORT, '127.0.0.1', () => {
-  // eslint-disable-next-line no-console
   console.log(`Dashboard server running: http://127.0.0.1:${PORT}`);
   console.log('Serving / -> offline-dashboard/index.html');
 });

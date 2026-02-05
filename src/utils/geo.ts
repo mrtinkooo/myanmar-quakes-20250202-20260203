@@ -80,4 +80,3 @@ export function depthColor(depthKm: number): string {
   if (depthKm < 70) return '#E6A100';
   return '#C0392B';
 }
-

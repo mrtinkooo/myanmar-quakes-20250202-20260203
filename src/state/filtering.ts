@@ -45,14 +45,7 @@ export function filterQuakes(quakes: QuakeFeature[], filters: Filters): QuakeFea
     const t = q.properties.time;
     const m = q.properties.mag;
     const d = q.geometry.coordinates[2];
-    return (
-      t >= time.startMs &&
-      t <= time.endMs &&
-      m >= mag.min &&
-      m <= mag.max &&
-      d >= depthKm.min &&
-      d <= depthKm.max
-    );
+    return t >= time.startMs && t <= time.endMs && m >= mag.min && m <= mag.max && d >= depthKm.min && d <= depthKm.max;
   });
 }
 
@@ -73,4 +66,3 @@ export function computeStats(quakes: QuakeFeature[]): {
   }
   return { count: quakes.length, maxMag, minTime, maxTime };
 }
-

@@ -13,7 +13,8 @@ If you're seeing a **404 error** on `https://mrtinkooo.github.io/myanmar-quakes-
 
 **The issue**: The initial deployment failed because GitHub Pages wasn't properly configured when the workflow first ran.
 
-**The solution**: 
+**The solution**:
+
 1. **Verify GitHub Pages is enabled**: Go to [Repository Settings → Pages](https://github.com/mrtinkooo/myanmar-quakes-20250202-20260203/settings/pages) and ensure:
    - **Source** is set to **"GitHub Actions"** (not "Deploy from a branch")
 2. **Merge this PR to main**: This will trigger a new deployment with the fix
@@ -42,6 +43,7 @@ Follow these steps once to enable GitHub Pages deployment:
 ### Step 3: Access Your Dashboard
 
 After the workflow completes (usually 2-3 minutes):
+
 - Your dashboard will be available at: **`https://mrtinkooo.github.io/myanmar-quakes-20250202-20260203/`**
 
 ## 🔄 Automatic Deployments
@@ -81,6 +83,7 @@ The following files were added/modified to enable GitHub Pages deployment:
 **Cause**: GitHub Pages wasn't properly enabled when the first deployment ran
 
 **Solution**:
+
 1. Verify GitHub Pages is enabled with **"GitHub Actions"** as source in repository settings
 2. Trigger a new deployment by:
    - Merging a new change to `main` branch, OR

@@ -61,4 +61,3 @@ export async function loadDashboardData(): Promise<{
 
   return { quakes, lineaments, admin0 };
 }
-
