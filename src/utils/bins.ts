@@ -39,7 +39,10 @@ export function histogramEvenBins(
     let idx = Math.floor((v - start) / step);
     if (idx < 0) idx = 0;
     if (idx >= binCount) idx = binCount - 1;
-    counts[idx] += 1;
+    const currentCount = counts[idx];
+    if (currentCount !== undefined) {
+      counts[idx] = currentCount + 1;
+    }
   }
 
   const digits = opts?.labelDigits ?? 1;

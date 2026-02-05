@@ -107,7 +107,7 @@ export default function DepthVsMagScatter(props: {
             />
             <Scatter
               data={data}
-              shape={(p) => <Dot {...p} selectedId={props.selectedId} />}
+              shape={(p: unknown) => <Dot {...(p as object)} selectedId={props.selectedId} />}
               onClick={(d) => {
                 const row = (d as { payload?: PointRow }).payload;
                 if (row?.id) props.onSelectQuake(row.id);

@@ -55,34 +55,31 @@ export default function MapView(props: {
           minZoom={4}
           scrollWheelZoom
           preferCanvas
-          whenReady={(e) => {
-            mapRef.current = e.target;
-          }}
+          ref={mapRef}
         >
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
 
           <Pane name="admin0" style={{ zIndex: 350 }}>
             <GeoJSON
               data={props.admin0 as unknown as GeoJSON.GeoJsonObject}
-              style={() => ({
+              pathOptions={{
                 color: 'rgba(255,255,255,0.65)',
                 weight: 2,
                 fillOpacity: 0,
-              })}
+              }}
             />
           </Pane>
 
           <Pane name="lineaments" style={{ zIndex: 360 }}>
             <GeoJSON
               data={props.lineaments as unknown as GeoJSON.GeoJsonObject}
-              style={() => ({
+              pathOptions={{
                 color: '#ffb703',
                 weight: 1,
                 opacity: 0.65,
-              })}
+              }}
             />
           </Pane>
 
